@@ -16,8 +16,8 @@ const EventList = () => {
   const filteredEvents = (
     (!type
       ? data?.events
-      : data?.events) || []
-  ).filter((event, index) => {
+      : data?.events.filter((event) => event.type === type)) || []
+  ).filter((_, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
       PER_PAGE * currentPage > index
@@ -27,6 +27,8 @@ const EventList = () => {
     return false;
   });
   const changeType = (evtType) => {
+    const selected = document.querySelector('input[name=select]').value
+    console.log(selected)
     setCurrentPage(1);
     setType(evtType);
   };
